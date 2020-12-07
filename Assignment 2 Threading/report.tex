@@ -1,0 +1,312 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{placeins}
+\usepackage[font=small,labelfont=bf,justification=centering]{caption}
+\usepackage[english]{babel}
+\usepackage{algorithmic}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[table,xcdraw]{xcolor}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{black}
+}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{amssymb}
+\newcommand*{\field}[1]{\mathbb{#1}}%
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{color}
+\usepackage{changepage}
+\setlength{\columnseprule}{0.3pt}
+\def\columnseprulecolor{\color{black}}
+\graphicspath{ {./} }
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,250mm},
+ left=17mm,
+ right=17mm,
+ top=20mm,
+ }
+ \graphicspath{ {./} }
+ 
+\title{\textsc{Assignment 2}}
+\author{\textbf{Aniket Sanghi} (170110)}
+\date{3rd October 2020}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\fancyhead{}
+\rfoot{Prof. Swarnendu Biswas}
+\lfoot{CS610: Programming for Performance}
+\cfoot{\thepage}
+\begin{center}
+I pledge on my honor that I have not given or received any unauthorized assistance.\\
+\end{center}
+
+\vspace{3cm}
+\section{Solution 1}
+
+\hrule
+\begin{lstlisting}
+for i = 1, N-2
+    for j = i+1, i+N-2
+        A(i, i-j) = A(i, i-j-1) - A(i-1, i-j) + A(i+1, i-j+1)
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+\begin{itemize}
+\item $A(i, i-j) = ... \,\, A(i, i-j-1)$ Lets try by assuming a flow dependence\\
+	$I_0 = I_0 + \Delta I \implies \Delta I = 0$ \\
+	$I_0 - J_0 = I_0 + \Delta I - J_0 - \Delta J - 1 \implies \Delta J = -1$ \\
+	So, it is an {\bf Anti Dependence (0, 1)} with direction vector {\bf (0, +)}
+\item $A(i, i-j) = ... \,\, A(i-1, i-j)$ Lets try by assuming a flow dependence\\
+	$I_0 = I_0 + \Delta I - 1 \implies \Delta I = 1$ \\
+	$I_0 - J_0 = I_0 + \Delta I - J_0 - \Delta J \implies \Delta J = 1$ \\
+	So, it is a {\bf Flow Dependence (1, 1)} with direction vector {\bf (+, +)}
+\item $A(i, i-j) = ... \,\, A(i+1, i-j+1)$ Lets try by assuming a flow dependence\\
+	$I_0 = I_0 + \Delta I + 1 \implies \Delta I = -1$ \\
+	$I_0 - J_0 = I_0 + \Delta I - J_0 - \Delta J + 1\implies \Delta J = 0$ \\
+	So, it is an {\bf Anti Dependence (1, 0)} with direction vector {\bf (+, 0)}
+\item No output dependence as different indices accessed each time
+\end{itemize}
+
+\newpage
+%2
+\section{Solution 2}
+
+\hrule
+\begin{lstlisting}
+int i, j, t, k;
+for(t = 0; i < 2048; t++) {
+    for(i = t; i < 1024; i++) {
+        for(j = t; j < i; j++) {
+            for(k = 1; k < j; k++) {
+                S(t, i, j, k);
+            }
+        }
+    }
+}
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+Given data dependences {\bf (1, 0, -1, 1), (1, -1, 0, 1), (0, 1, 0, -2)}
+\newline
+\subsection{(a)} Each of {\bf t, i, j, k} loops are valid to unroll as for unrolling we don't need any special case, we can just unroll and take care of edge cases (to avoid errors). \\
+But only loops {\bf j, k} are valid when we do both - {\bf unroll and jamming}
+
+\subsection{(b)} {\bf (t, i, j, k) \& (t, i, k, j) \& (t, j, i, k)} are valid permutations of the loops will all dependences valid. Reasoning - 
+\begin{itemize}
+\item {\bf i} can't be outer loop as it will make the dependence (1, -1, 0, 1) invalid
+\item {\bf j} can't be outer loop as it will make the dependence (1, 0, -1, 1) invalid
+\item {\bf k} can't be outer loop as it will make the dependence (0, 1, 0, -2) invalid
+\item {\bf k} can't be second outer loop after t as it will make the dependence (0, 1, 0, -2) invalid
+\item{\bf (t, j, k, i)} will make (0, 1, 0, -2) invalid
+\end{itemize}
+
+\subsection{(c)} Following tilings are valid
+\begin{itemize}
+\item 1D tilings of {\bf t, i, j, k} are valid (though it doesn't offer any benefits in performance)
+\item 2D tilings of {\bf (j, k) \& (i, j)} are valid
+\end{itemize}
+
+\subsection{(d)} Loop {\bf j \& k} are parallelizable as they don't carry any dependences.\\ In the first 2 dependences $t$ carry the dependence and in the third one $i$ carry the dependence.
+
+\subsection{(e)} Following is the tikj form of the code
+\newline
+\hrule
+\begin{lstlisting}
+int i, j, t, k;
+for(t = 0; i < 2048; t++) {
+    for(i = t; i < 1024; i++) {
+        for(k = 1; k < i-1; k++) {
+            for(j = max(t, k+1); j < i; j++) {
+                S(t, i, j, k);
+            }
+        }
+    }
+}
+\end{lstlisting}
+\hrule 
+
+\newpage
+
+%3
+\section{Solution 3}
+
+\hrule
+\begin{lstlisting}
+#define N 4096
+double A[N][N];
+int t, i, j;
+for(t = 0; t < N-1; t++) {
+    for(i = 1; i < N-1; i++) {
+        for(j = 1; j < N-1; j++) {
+            A[i][j] = 0.2*(A[i-1][j] + A[i][j] + A[i+1][j] + A[i][j-1] + A[i][j+1]);
+        }
+    }
+}
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+\subsection{(a)} Following are the dependences in the above loop nest
+\begin{itemize}
+\item $A[i][j] = ... \,\, A[i-1][j]$ gives dependence {\bf (*, 1, 0)}
+	\begin{itemize}
+	\item {\bf (1, 1, 0), Flow Dependence} with direction vector {\bf (+, +, 0)}
+	\item {\bf (0, 1, 0), Flow Dependence} with direction vector {\bf (0, +, 0)}
+	\item {\bf (1, -1, 0), Anti Dependence} with direction vector {\bf (+, -, 0)}
+	\end{itemize}
+\item $A[i][j] = ... \,\, A[i][j]$ gives dependence {\bf (*, 1, 0)}
+	\begin{itemize}
+	\item {\bf (1, 0, 0), Anti Dependence} with direction vector {\bf (+, 0, 0)}
+	\item {\bf (0, 0, 0), Anti Dependence} with direction vector {\bf (0, 0, 0)}
+	\item {\bf (1, 0, 0), Flow Dependence} with direction vector {\bf (+, 0, 0)}
+	\end{itemize}
+\item $A[i][j] = ... \,\, A[i+1][j]$ gives dependence {\bf (*, 1, 0)}
+	\begin{itemize}
+	\item {\bf (1, 1, 0), Anti Dependence} with direction vector {\bf (+, +, 0)}
+	\item {\bf (0, 1, 0), Anti Dependence} with direction vector {\bf (0, +, 0)}
+	\item {\bf (1, -1, 0), Flow Dependence} with direction vector {\bf (+, -, 0)}
+	\end{itemize}
+\item $A[i][j] = ... \,\, A[i][j-1]$ gives dependence {\bf (*, 1, 0)}
+	\begin{itemize}
+	\item {\bf (1, 0, 1), Flow Dependence} with direction vector {\bf (+, 0, +)}
+	\item {\bf (0, 0, 1), Flow Dependence} with direction vector {\bf (0, 0, +)}
+	\item {\bf (1, 0, -1), Anti Dependence} with direction vector {\bf (+, 0, -)}
+	\end{itemize}
+\item $A[i][j] = ... \,\, A[i][j+1]$ gives dependence {\bf (*, 1, 0)}
+	\begin{itemize}
+	\item {\bf (1, 0, 1), Anti Dependence} with direction vector {\bf (+, 0, +)}
+	\item {\bf (0, 0, 1), Anti Dependence} with direction vector {\bf (0, 0, +)}
+	\item {\bf (1, 0, -1), Flow Dependence} with direction vector {\bf (+, 0, -)}
+	\end{itemize}
+\item $A[i][j] = $ gives output dependence as well
+	\begin{itemize}
+	\item {\bf (1, 0, 0) Output Dependence} with direction vector {\bf (+, 0 0)}
+	\end{itemize}
+\end{itemize}
+
+\subsection{(b)} 
+{\bf (t, i, j) \& (t, j, i)} are valid permutations where all dependences are valid. Reasoning - 
+\begin{itemize}
+\item {\bf i} can't be outer-most loop as then dependences like (1, -1, 0) will become invalid.
+\item {\bf j} can't be outer-most loop as then dependences like (1, 0, -1) will become invalid.
+\item {\bf (t, j, i)} is valid as where-ever t is not carrying dependence, none of i / j is negative. So interchange is valid.
+\end{itemize}
+
+\subsection{(c)} Each of {\bf t, i, j} loops are valid to unroll as for unrolling we don't need any special case, we can just unroll and take care of edge cases (to avoid errors). \\
+But only loops {\bf i j} are valid when we do both - {\bf unroll and jamming}
+
+\subsection{(d)} Following tilings are valid as permuting them don't make dependence invalid.
+\begin{itemize}
+\item 1D tilings of {\bf t, i, j} are valid (though it doesn't offer any benefits in performance)
+\item 2D tilings of {\bf (i, j)} only is valid (since (t, i, j) and (t, j, i) are both valid permutations as explained in (b))
+\end{itemize}
+
+
+\section{Solution 4}
+
+How to Run \\
+\hrule
+\begin{lstlisting}
+g++ -O3 problem4.cpp -lpthread
+./a.out <number_of_customers>
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+where replace $<number\_of\_customers>$ with the count of customers, value in range [0 24] \\ 
+\newline
+\newline
+{\bf Few Internal Details Highlights}
+\begin{itemize}
+\item Each customer thread is given monotonically increasing token non-deterministically
+\item Each customer thread is enqueued non-deterministically
+\item Teller informs about the complete of transaction to customer, then only the customer leaves 
+\item Customer just before leaving will inform the next person in queue that teller is free now
+\item Rest all things are briefly commented in the code to ease the understanding
+\end{itemize}
+
+
+\section{Solution 5}
+
+{\bf How to Run} \\
+\hrule
+\begin{lstlisting}
+g++ problem5.cpp -lpthread
+./a.out <number_of_threads> <blocking_size>
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+$ <blocking\_size> = 4 \implies 4 \times 4 \,\, sized \,\, blocks $ Make sure to keep blocking\_size $>= 16$.
+\newline \newline
+Tested various degrees of Unrolling in the optimised version 2, 4, 8, 16, 32. To test other unrolling factors you can use the other code in the directory which can be run as below
+\vspace{0.5cm}
+\hrule
+\begin{lstlisting}
+g++ problem5b.cpp -lpthread -o p5
+time ./p5 <number_of_threads> <blocking_size> <unrolling_factor>
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+Make sure to keep $blocking\_size > unrolling\_factor$ and unrolling factor can be 1, 4, 8 only.
+\newpage
+\subsection{(a)}
+\begin{minipage}{0.4\textwidth}
+Tested on System with configuration
+\begin{itemize}
+\item Model - Intel(R) Core(TM) i7-8700 
+\item CPU @ 3.20GHz 
+\item Number of Cores - 6
+\item Number of threads per core - 2
+\end{itemize}
+
+The speedup for 2 threads is 2x but the speed up for 4 and 8 threads didn't scale similarly. Possible reasons - 
+\begin{enumerate}
+\item Busy System, the machine I used is a CSE server used by many people
+\item Context Switching overheads
+\item Varying speed/performance of different cores, slowest core being the bottleneck
+\end{enumerate}
+
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\includegraphics[scale=0.8]{solution5a.png}
+\end{minipage}
+
+\subsection{(b)}
+
+The steps to run and test various variants are mentioned above. \\
+\newline
+{\bf Best performing variant} for the architecture I tested on was the one with {\it unrolling by a factor of 16} and {\it blocking by a factor of 32} \\
+\newline
+Sequential got a boost of about 5.5x with blocking and unrolling as compared to 3.5x, got with coarse parallelisation with 8 threads suggesting that blocking significantly can increase a lot of performance even when compared with coarse parallelisation. \\
+\newline
+System Cache Model 
+\begin{itemize}
+\item L1d cache:           32K
+\item L1i cache:           32K
+\item L2 cache:            256K
+\item L3 cache:            12288K
+\end{itemize}
+The total size needed for all 3 arrays for blocks of size $32 \times 32$ is $3 * 2^5 * 2^5 * 2^3 B = 24K$ which is quite close to the 32K L1 cache availability. Actually 64 block size is expected to give better performance considering that total size of L1 cache is 64K but due to system being busy with various other programs as well the 32 block size variant gave best performance (64 block size variant gave almost similar performance). \\
+\newline
+Regarding unrolling, the further increase of unrolling factor from 16 to 64 doesn't seem to give benefits. It mostly decreased performance. Most plausible reason being the resistor overload and increased number of statements which led to performance degradation. \\
+\newline
+The variant which combined parallelisation benefits with blocking and unrolling gave around 24x improvement which is quite a lot of improvement. The program ran in around 40seconds as compared to 15-18mins of the sequential version.
+
+\end{document}

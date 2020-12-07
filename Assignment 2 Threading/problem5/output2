@@ -1,0 +1,1096 @@
+N = 2048
+
+
+Threads = 1, Blocking = 1, Unrolling = 1
+
+real	3m23.991s
+user	3m23.969s
+sys	0m0.020s
+
+
+
+Threads = 1, Blocking = 4, Unrolling = 1
+
+real	0m40.822s
+user	0m40.797s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m10.635s
+user	0m10.615s
+sys	0m0.020s
+
+
+
+Threads = 1, Blocking = 4, Unrolling = 4
+
+real	0m37.351s
+user	0m37.327s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m10.445s
+user	0m10.421s
+sys	0m0.024s
+
+
+
+Threads = 1, Blocking = 8, Unrolling = 1
+
+real	0m34.192s
+user	0m34.168s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m5.566s
+user	0m5.554s
+sys	0m0.012s
+
+
+
+Threads = 1, Blocking = 8, Unrolling = 4
+
+real	0m31.051s
+user	0m31.017s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m5.253s
+user	0m5.237s
+sys	0m0.016s
+
+
+
+Threads = 1, Blocking = 8, Unrolling = 8
+
+real	0m29.850s
+user	0m29.826s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m6.570s
+user	0m6.542s
+sys	0m0.028s
+
+
+
+Threads = 1, Blocking = 16, Unrolling = 1
+
+real	0m34.539s
+user	0m34.523s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m5.280s
+user	0m5.256s
+sys	0m0.024s
+
+
+
+Threads = 1, Blocking = 16, Unrolling = 4
+
+real	0m31.047s
+user	0m31.030s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m5.365s
+user	0m5.341s
+sys	0m0.024s
+
+
+
+Threads = 1, Blocking = 16, Unrolling = 8
+
+real	0m30.227s
+user	0m30.199s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m6.694s
+user	0m6.666s
+sys	0m0.028s
+
+
+
+Threads = 1, Blocking = 32, Unrolling = 1
+
+real	0m34.662s
+user	0m34.645s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m8.102s
+user	0m8.074s
+sys	0m0.028s
+
+
+
+Threads = 1, Blocking = 32, Unrolling = 4
+
+real	0m33.605s
+user	0m33.581s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m8.954s
+user	0m8.946s
+sys	0m0.008s
+
+
+
+Threads = 1, Blocking = 32, Unrolling = 8
+
+real	0m33.283s
+user	0m33.258s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m9.586s
+user	0m9.574s
+sys	0m0.012s
+
+
+
+Threads = 1, Blocking = 64, Unrolling = 1
+
+real	0m40.847s
+user	0m40.822s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m10.531s
+user	0m10.502s
+sys	0m0.028s
+
+
+
+Threads = 1, Blocking = 64, Unrolling = 4
+
+real	0m39.515s
+user	0m39.486s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m10.627s
+user	0m10.610s
+sys	0m0.016s
+
+
+
+Threads = 1, Blocking = 64, Unrolling = 8
+
+real	0m38.656s
+user	0m38.627s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m10.682s
+user	0m10.657s
+sys	0m0.024s
+
+
+
+Threads = 2, Blocking = 1, Unrolling = 1
+
+real	1m11.341s
+user	2m22.616s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m35.184s
+user	1m10.306s
+sys	0m0.028s
+
+
+
+Threads = 2, Blocking = 1, Unrolling = 4
+
+real	2m2.910s
+user	4m5.766s
+sys	0m0.008s
+
+
+
+Now With O3 Flag
+
+real	0m46.055s
+user	1m32.059s
+sys	0m0.016s
+
+
+
+Threads = 2, Blocking = 1, Unrolling = 8
+
+real	3m10.478s
+user	6m20.892s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	1m13.221s
+user	2m26.290s
+sys	0m0.112s
+
+
+
+Threads = 2, Blocking = 4, Unrolling = 1
+
+real	0m17.819s
+user	0m35.575s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m5.507s
+user	0m10.960s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 4, Unrolling = 4
+
+real	0m16.379s
+user	0m32.686s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m5.046s
+user	0m10.035s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 4, Unrolling = 8
+
+real	0m31.704s
+user	1m3.341s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m8.089s
+user	0m16.115s
+sys	0m0.028s
+
+
+
+Threads = 2, Blocking = 8, Unrolling = 1
+
+real	0m16.061s
+user	0m32.061s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m3.609s
+user	0m7.156s
+sys	0m0.028s
+
+
+
+Threads = 2, Blocking = 8, Unrolling = 4
+
+real	0m15.173s
+user	0m30.278s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m2.856s
+user	0m5.639s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 8, Unrolling = 8
+
+real	0m15.794s
+user	0m31.527s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m3.647s
+user	0m7.239s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 16, Unrolling = 1
+
+real	0m16.069s
+user	0m32.083s
+sys	0m0.008s
+
+
+
+Now With O3 Flag
+
+real	0m3.214s
+user	0m6.334s
+sys	0m0.016s
+
+
+
+Threads = 2, Blocking = 16, Unrolling = 4
+
+real	0m15.478s
+user	0m30.844s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m2.764s
+user	0m5.466s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 16, Unrolling = 8
+
+real	0m15.712s
+user	0m31.036s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m3.355s
+user	0m6.657s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 32, Unrolling = 1
+
+real	0m17.737s
+user	0m35.253s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m4.290s
+user	0m8.513s
+sys	0m0.028s
+
+
+
+Threads = 2, Blocking = 32, Unrolling = 4
+
+real	0m17.453s
+user	0m34.406s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m4.486s
+user	0m8.911s
+sys	0m0.028s
+
+
+
+Threads = 2, Blocking = 32, Unrolling = 8
+
+real	0m17.049s
+user	0m33.915s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m4.942s
+user	0m9.772s
+sys	0m0.028s
+
+
+
+Threads = 2, Blocking = 64, Unrolling = 1
+
+real	0m20.563s
+user	0m41.032s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m5.281s
+user	0m10.497s
+sys	0m0.032s
+
+
+Threads = 2, Blocking = 64, Unrolling = 4
+
+real	0m20.004s
+user	0m39.905s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m5.344s
+user	0m10.634s
+sys	0m0.020s
+
+
+
+Threads = 2, Blocking = 64, Unrolling = 8
+
+real	0m20.292s
+user	0m39.916s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m5.337s
+user	0m10.613s
+sys	0m0.028s
+
+
+
+Threads = 4, Blocking = 1, Unrolling = 1
+
+real	0m37.953s
+user	2m31.013s
+sys	0m0.008s
+
+
+
+Now With O3 Flag
+
+real	0m16.851s
+user	1m6.855s
+sys	0m0.024s
+
+
+
+Threads = 4, Blocking = 1, Unrolling = 4
+
+real	1m3.645s
+user	4m12.095s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m28.484s
+user	1m53.487s
+sys	0m0.024s
+
+
+
+Threads = 4, Blocking = 1, Unrolling = 8
+
+real	1m39.063s
+user	6m32.587s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m45.151s
+user	2m57.603s
+sys	0m0.032s
+
+
+
+Threads = 4, Blocking = 4, Unrolling = 1
+
+real	0m9.504s
+user	0m37.862s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m2.941s
+user	0m11.425s
+sys	0m0.024s
+
+
+
+Threads = 4, Blocking = 4, Unrolling = 4
+
+real	0m9.168s
+user	0m35.578s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m4.744s
+user	0m18.651s
+sys	0m0.024s
+
+
+
+Threads = 4, Blocking = 4, Unrolling = 8
+
+real	0m18.717s
+user	1m14.630s
+sys	0m0.044s
+
+
+
+Now With O3 Flag
+
+real	0m7.747s
+user	0m30.765s
+sys	0m0.024s
+
+
+
+Threads = 4, Blocking = 8, Unrolling = 1
+
+real	0m8.485s
+user	0m33.752s
+sys	0m0.012s
+
+
+
+Now With O3 Flag
+
+real	0m2.353s
+user	0m9.186s
+sys	0m0.028s
+
+
+
+Threads = 4, Blocking = 8, Unrolling = 4
+
+real	0m8.259s
+user	0m32.524s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m1.658s
+user	0m6.302s
+sys	0m0.028s
+
+
+
+Threads = 4, Blocking = 8, Unrolling = 8
+
+real	0m8.433s
+user	0m33.563s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m2.771s
+user	0m10.921s
+sys	0m0.020s
+
+
+
+Threads = 4, Blocking = 16, Unrolling = 1
+
+real	0m9.162s
+user	0m35.961s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m2.096s
+user	0m8.187s
+sys	0m0.020s
+
+
+
+Threads = 4, Blocking = 16, Unrolling = 4
+
+real	0m8.647s
+user	0m34.052s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m2.351s
+user	0m9.141s
+sys	0m0.024s
+
+
+
+Threads = 4, Blocking = 16, Unrolling = 8
+
+real	0m8.711s
+user	0m34.001s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m2.352s
+user	0m9.069s
+sys	0m0.016s
+
+
+
+Threads = 4, Blocking = 32, Unrolling = 1
+
+real	0m9.862s
+user	0m38.775s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m2.464s
+user	0m9.555s
+sys	0m0.016s
+
+
+
+Threads = 4, Blocking = 32, Unrolling = 4
+
+real	0m9.288s
+user	0m36.786s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m2.445s
+user	0m9.623s
+sys	0m0.028s
+
+
+
+Threads = 4, Blocking = 32, Unrolling = 8
+
+real	0m9.524s
+user	0m37.416s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m2.600s
+user	0m10.258s
+sys	0m0.032s
+
+
+
+Threads = 4, Blocking = 64, Unrolling = 1
+
+real	0m11.692s
+user	0m45.355s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m2.973s
+user	0m11.543s
+sys	0m0.028s
+
+
+
+Threads = 4, Blocking = 64, Unrolling = 4
+
+real	0m11.187s
+user	0m43.284s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m2.892s
+user	0m11.451s
+sys	0m0.016s
+
+
+
+Threads = 4, Blocking = 64, Unrolling = 8
+
+real	0m11.035s
+user	0m43.549s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m2.899s
+user	0m11.471s
+sys	0m0.020s
+
+
+
+Threads = 8, Blocking = 1, Unrolling = 1
+
+real	0m32.073s
+user	3m56.275s
+sys	0m0.056s
+
+
+
+Now With O3 Flag
+
+real	0m13.586s
+user	1m41.808s
+sys	0m0.028s
+
+
+
+Threads = 8, Blocking = 1, Unrolling = 4
+
+real	0m54.215s
+user	7m3.552s
+sys	0m0.044s
+
+
+
+Now With O3 Flag
+
+real	0m28.373s
+user	3m39.794s
+sys	0m0.076s
+
+
+
+Threads = 8, Blocking = 1, Unrolling = 8
+
+real	1m21.290s
+user	10m35.452s
+sys	0m0.116s
+
+
+
+Now With O3 Flag
+
+real	0m32.190s
+user	4m1.603s
+sys	0m0.024s
+
+
+
+Threads = 8, Blocking = 4, Unrolling = 1
+
+real	0m7.839s
+user	0m56.985s
+sys	0m0.028s
+
+
+
+Now With O3 Flag
+
+real	0m2.467s
+user	0m17.131s
+sys	0m0.032s
+
+
+
+Threads = 8, Blocking = 4, Unrolling = 4
+
+real	0m7.262s
+user	0m52.301s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m3.209s
+user	0m24.818s
+sys	0m0.028s
+
+
+
+Threads = 8, Blocking = 4, Unrolling = 8
+
+real	0m15.716s
+user	1m59.592s
+sys	0m0.040s
+
+
+
+Now With O3 Flag
+
+real	0m7.223s
+user	0m55.771s
+sys	0m0.028s
+
+
+
+Threads = 8, Blocking = 8, Unrolling = 1
+
+real	0m7.320s
+user	0m52.486s
+sys	0m0.008s
+
+
+
+Now With O3 Flag
+
+real	0m2.420s
+user	0m17.728s
+sys	0m0.032s
+
+
+
+Threads = 8, Blocking = 8, Unrolling = 4
+
+real	0m6.946s
+user	0m49.931s
+sys	0m0.036s
+
+
+
+Now With O3 Flag
+
+real	0m2.194s
+user	0m15.633s
+sys	0m0.032s
+
+
+
+Threads = 8, Blocking = 8, Unrolling = 8
+
+real	0m7.333s
+user	0m53.108s
+sys	0m0.044s
+
+
+
+Now With O3 Flag
+
+real	0m2.658s
+user	0m19.910s
+sys	0m0.036s
+
+
+
+Threads = 8, Blocking = 16, Unrolling = 1
+
+real	0m7.700s
+user	0m52.856s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m1.924s
+user	0m12.883s
+sys	0m0.024s
+
+
+
+Threads = 8, Blocking = 16, Unrolling = 4
+
+real	0m7.287s
+user	0m51.946s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m1.915s
+user	0m13.209s
+sys	0m0.020s
+
+
+
+Threads = 8, Blocking = 16, Unrolling = 8
+
+real	0m7.229s
+user	0m51.414s
+sys	0m0.040s
+
+
+
+Now With O3 Flag
+
+real	0m1.961s
+user	0m13.001s
+sys	0m0.032s
+
+
+
+Threads = 8, Blocking = 32, Unrolling = 1
+
+real	0m7.845s
+user	0m56.248s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m1.990s
+user	0m13.666s
+sys	0m0.016s
+
+
+
+Threads = 8, Blocking = 32, Unrolling = 4
+
+real	0m7.465s
+user	0m54.450s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m2.050s
+user	0m14.198s
+sys	0m0.032s
+
+
+
+Threads = 8, Blocking = 32, Unrolling = 8
+
+real	0m7.746s
+user	0m55.329s
+sys	0m0.024s
+
+
+
+Now With O3 Flag
+
+real	0m2.099s
+user	0m14.600s
+sys	0m0.040s
+
+
+
+Threads = 8, Blocking = 64, Unrolling = 1
+
+real	0m9.302s
+user	1m7.710s
+sys	0m0.032s
+
+
+
+Now With O3 Flag
+
+real	0m2.317s
+user	0m15.792s
+sys	0m0.032s
+
+
+
+Threads = 8, Blocking = 64, Unrolling = 4
+
+real	0m8.723s
+user	1m2.800s
+sys	0m0.020s
+
+
+
+Now With O3 Flag
+
+real	0m2.248s
+user	0m15.846s
+sys	0m0.028s
+
+
+
+Threads = 8, Blocking = 64, Unrolling = 8
+
+real	0m8.761s
+user	1m4.599s
+sys	0m0.016s
+
+
+
+Now With O3 Flag
+
+real	0m2.240s
+user	0m15.775s
+sys	0m0.036s
+

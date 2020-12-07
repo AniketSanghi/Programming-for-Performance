@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Fibonacci}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Compilation and execution instruction }{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{\(i\) OpenMP explicit tasks}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{\(ii\) OpenMP explicit tasks Optimised}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{\(iii\) Intel TBB \(Blocking Style\)}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{\(iv\) Intel TBB \(Continuation Passing Style\)}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{QuickSort}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Compilation and execution instruction }{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Performance Report}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Pi}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Compilation and execution instruction }{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Performance Report}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Find Max}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Compilation and execution instruction }{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Performance Report}{section.4}% 15

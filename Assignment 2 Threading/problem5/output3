@@ -1,0 +1,515 @@
+Threads = 1, Blocking = 1, Unrolling = 1
+
+real	46m1.097s
+user	46m0.959s
+sys	0m0.092s
+
+
+
+Now With O3 Flag
+
+real	18m29.554s
+user	18m29.432s
+sys	0m0.100s
+
+
+
+Threads = 1, Blocking = 1, Unrolling = 4
+run.sh: line 15: 24577 Killed                  ./withoutO3 $i $j $k
+
+real	64m25.787s
+user	64m25.669s
+sys	0m0.064s
+
+
+
+Now With O3 Flag
+run.sh: line 15: 26278 Killed                  ./withO3 $i $j $k
+
+real	0m21.988s
+user	0m21.892s
+sys	0m0.096s
+
+
+
+Threads = 1, Blocking = 1, Unrolling = 8
+run.sh: line 15: 26294 Killed                  ./withoutO3 $i $j $k
+
+real	0m20.260s
+user	0m20.175s
+sys	0m0.084s
+
+
+
+Now With O3 Flag
+run.sh: line 15: 26309 Killed                  ./withO3 $i $j $k
+
+real	0m27.557s
+user	0m27.472s
+sys	0m0.084s
+
+
+
+Threads = 1, Blocking = 4, Unrolling = 1
+
+real	6m11.590s
+user	6m11.489s
+sys	0m0.096s
+
+
+
+Now With O3 Flag
+
+real	2m32.148s
+user	2m32.051s
+sys	0m0.096s
+
+
+
+Threads = 1, Blocking = 4, Unrolling = 4
+
+real	5m47.325s
+user	5m47.237s
+sys	0m0.084s
+
+
+
+Now With O3 Flag
+
+real	2m34.221s
+user	2m34.135s
+sys	0m0.084s
+
+
+
+Threads = 1, Blocking = 4, Unrolling = 8
+
+real	10m6.583s
+user	10m6.502s
+sys	0m0.076s
+
+
+
+Now With O3 Flag
+
+real	3m52.685s
+user	3m52.595s
+sys	0m0.088s
+
+
+
+Threads = 1, Blocking = 8, Unrolling = 1
+
+real	4m42.197s
+user	4m42.080s
+sys	0m0.104s
+
+
+
+Now With O3 Flag
+
+real	0m59.060s
+user	0m58.964s
+sys	0m0.096s
+
+
+
+Threads = 1, Blocking = 8, Unrolling = 4
+
+real	4m30.238s
+user	4m30.128s
+sys	0m0.108s
+
+
+
+Now With O3 Flag
+
+real	0m58.331s
+user	0m58.222s
+sys	0m0.108s
+
+
+
+Threads = 1, Blocking = 8, Unrolling = 8
+
+real	4m28.863s
+user	4m28.780s
+sys	0m0.072s
+
+
+
+Now With O3 Flag
+
+real	1m16.609s
+user	1m16.497s
+sys	0m0.112s
+
+
+
+Threads = 1, Blocking = 16, Unrolling = 1
+
+real	5m17.831s
+user	5m17.752s
+sys	0m0.076s
+
+
+
+Now With O3 Flag
+
+real	1m0.817s
+user	1m0.724s
+sys	0m0.092s
+
+
+
+Threads = 1, Blocking = 16, Unrolling = 4
+
+real	4m34.071s
+user	4m33.934s
+sys	0m0.128s
+
+
+
+Now With O3 Flag
+
+real	1m3.508s
+user	1m3.419s
+sys	0m0.088s
+
+
+Threads = 1, Blocking = 16, Unrolling = 8
+
+real	4m21.835s
+user	4m21.741s
+sys	0m0.092s
+
+
+
+Now With O3 Flag
+
+real	1m12.869s
+user	1m12.796s
+sys	0m0.072s
+
+
+
+Threads = 1, Blocking = 32, Unrolling = 1
+
+real	5m0.226s
+user	5m0.127s
+sys	0m0.096s
+
+
+
+Now With O3 Flag
+
+real	1m12.681s
+user	1m12.588s
+sys	0m0.092s
+
+
+
+Threads = 1, Blocking = 32, Unrolling = 4
+
+real	4m40.330s
+user	4m40.267s
+sys	0m0.060s
+
+
+
+Now With O3 Flag
+
+real	1m18.167s
+user	1m18.074s
+sys	0m0.092s
+
+
+
+Threads = 1, Blocking = 32, Unrolling = 8
+
+real	4m35.258s
+user	4m35.172s
+sys	0m0.084s
+
+
+
+Now With O3 Flag
+
+real	1m21.888s
+user	1m21.795s
+sys	0m0.092s
+
+
+
+Threads = 1, Blocking = 64, Unrolling = 1
+
+real	5m39.075s
+user	5m38.992s
+sys	0m0.080s
+
+
+
+Now With O3 Flag
+
+real	1m26.104s
+user	1m26.007s
+sys	0m0.096s
+
+
+
+Threads = 1, Blocking = 64, Unrolling = 4
+
+real	5m30.266s
+user	5m30.187s
+sys	0m0.076s
+
+
+
+Now With O3 Flag
+
+real	1m26.992s
+user	1m26.891s
+sys	0m0.100s
+
+
+
+Threads = 1, Blocking = 64, Unrolling = 8
+
+real	5m19.014s
+user	5m18.903s
+sys	0m0.096s
+
+
+
+Now With O3 Flag
+
+real	1m26.986s
+user	1m26.897s
+sys	0m0.088s
+
+Threads = 2, Blocking = 1, Unrolling = 1
+N = 4096
+
+
+Threads = 2, Blocking = 1, Unrolling = 1
+
+real	23m14.488s
+user	46m28.663s
+sys	0m0.100s
+
+
+
+Now With O3 Flag
+
+
+
+Threads = 2, Blocking = 1, Unrolling = 4
+run.sh: line 15:  3180 Killed                  ./withoutO3 $i $j $k
+
+real	0m43.522s
+user	1m26.795s
+sys	0m0.068s
+
+
+
+Now With O3 Flag
+run.sh: line 15:  3200 Killed                  ./withO3 $i $j $k
+
+real	0m6.921s
+user	0m13.640s
+sys	0m0.064s
+
+
+
+Threads = 2, Blocking = 1, Unrolling = 8
+run.sh: line 15:  3206 Killed                  ./withoutO3 $i $j $k
+
+real	0m7.577s
+user	0m14.900s
+sys	0m0.084s
+
+
+
+Now With O3 Flag
+run.sh: line 15:  3215 Killed                  ./withO3 $i $j $k
+
+real	0m7.585s
+user	0m14.949s
+sys	0m0.092s
+
+
+
+Threads = 2, Blocking = 4, Unrolling = 1
+
+real	2m46.546s
+user	5m31.856s
+sys	0m0.072s
+
+
+
+Now With O3 Flag
+
+real	1m17.152s
+user	2m34.087s
+sys	0m0.084s
+
+
+
+Threads = 2, Blocking = 4, Unrolling = 4
+
+real	2m40.910s
+user	5m19.218s
+sys	0m0.104s
+
+
+
+Now With O3 Flag
+
+real	1m15.523s
+user	2m30.815s
+sys	0m0.092s
+
+
+
+Threads = 2, Blocking = 4, Unrolling = 8
+
+real	4m52.732s
+user	9m44.401s
+sys	0m0.104s
+
+
+
+Now With O3 Flag
+
+real	2m23.898s
+user	4m47.455s
+sys	0m0.096s
+
+
+
+Threads = 2, Blocking = 8, Unrolling = 1
+
+real	2m14.922s
+user	4m29.582s
+sys	0m0.080s
+
+
+
+Now With O3 Flag
+
+real	0m36.357s
+user	1m12.432s
+sys	0m0.148s
+
+
+
+Threads = 2, Blocking = 8, Unrolling = 4
+
+real	2m12.860s
+user	4m25.286s
+sys	0m0.064s
+
+
+
+Now With O3 Flag
+
+real	0m34.355s
+user	1m8.394s
+sys	0m0.084s
+
+
+
+Threads = 2, Blocking = 8, Unrolling = 8
+
+real	2m13.976s
+user	4m25.331s
+sys	0m0.096s
+
+
+
+Now With O3 Flag
+
+real	0m44.514s
+user	1m28.793s
+sys	0m0.100s
+
+
+
+Threads = 2, Blocking = 16, Unrolling = 1
+
+real	2m19.484s
+user	4m37.964s
+sys	0m0.104s
+
+
+
+Now With O3 Flag
+
+real	0m32.590s
+user	1m4.840s
+sys	0m0.088s
+
+
+
+Threads = 2, Blocking = 16, Unrolling = 4
+
+real	2m14.336s
+user	4m27.570s
+sys	0m0.064s
+
+
+
+Now With O3 Flag
+
+real	0m34.120s
+user	1m7.731s
+sys	0m0.096s
+
+
+
+Threads = 2, Blocking = 16, Unrolling = 8
+
+real	2m12.964s
+user	4m25.546s
+sys	0m0.100s
+
+
+
+Now With O3 Flag
+
+real	0m40.230s
+user	1m20.203s
+sys	0m0.084s
+
+
+
+Threads = 2, Blocking = 32, Unrolling = 1
+
+real	2m22.323s
+user	4m43.190s
+sys	0m0.088s
+
+
+
+Now With O3 Flag
+
+real	0m38.023s
+user	1m15.599s
+sys	0m0.088s
+
+
+
+Threads = 2, Blocking = 32, Unrolling = 4
+
+real	2m16.101s
+user	4m31.801s
+sys	0m0.088s
+
+
+
+Now With O3 Flag
+
+real	0m38.832s
+user	1m17.439s
+sys	0m0.092s
+

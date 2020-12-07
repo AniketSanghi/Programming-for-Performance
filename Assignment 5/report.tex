@@ -1,0 +1,371 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{placeins}
+\usepackage[font=small,labelfont=bf,justification=centering]{caption}
+\usepackage[english]{babel}
+\usepackage{algorithmic}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[table,xcdraw]{xcolor}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{black}
+}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{amssymb}
+\newcommand*{\field}[1]{\mathbb{#1}}%
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{color}
+\usepackage{changepage}
+\setlength{\columnseprule}{0.3pt}
+\def\columnseprulecolor{\color{black}}
+\graphicspath{ {./} }
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,250mm},
+ left=17mm,
+ right=17mm,
+ top=20mm,
+ }
+ \graphicspath{ {./} }
+ 
+\title{\textsc{Assignment 4}}
+\author{\textbf{Aniket Sanghi} (170110)}
+\date{13th November 2020}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\fancyhead{}
+\rfoot{Prof. Swarnendu Biswas}
+\lfoot{CS610: Programming for Performance}
+\cfoot{\thepage}
+\begin{center}
+I pledge on my honor that I have not given or received any unauthorized assistance.\\
+\end{center}
+\vspace{1cm}
+{\Large\bf System and Architecture Information } (Used CSE server)
+\vspace{0.5cm}
+\hrule
+\begin{lstlisting}
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              12
+On-line CPU(s) list: 0-11
+Thread(s) per core:  2
+Core(s) per socket:  6
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               79
+Model name:          Intel(R) Core(TM) i7-6850K CPU @ 3.60GHz
+Stepping:            1
+CPU MHz:             1200.311
+CPU max MHz:         4000.0000
+CPU min MHz:         1200.0000
+BogoMIPS:            7196.28
+Virtualization:      VT-x
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            256K
+L3 cache:            15360K
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+{\Large\bf Compilers Information } 
+\vspace{0.5cm}
+\hrule
+\begin{lstlisting}
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2018 NVIDIA Corporation
+Cuda compilation tools, release 10.0, V10.0.130
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+{\Large\bf System SSH } 
+\vspace{0.5cm}
+\hrule
+\begin{lstlisting}
+ssh <username>@gpu2.cse.iitk.ac.in
+\end{lstlisting}
+\hrule 
+\vspace{1cm}
+{\bf \emph{All problems have been executed on this server}}
+
+\newpage
+
+{\Large\bf GPU Configuration } (Used CSE server)
+\vspace{0.5cm}
+\hrule
+\begin{lstlisting}
+Device name: GeForce GTX 1080 Ti
+	Integrated or discrete GPU? discrete
+	Clock rate: 1544 MHz
+	Compute capability: 6.1
+	Number of asynchronous engines: 2
+
+	Number of SMs: 28
+	Total number of CUDA cores: 3584
+	Max threads per SM: 2048
+	Max threads per block: 1024
+	Warp size: 32
+	Max grid size (i.e., max number of blocks): [2147483647,65535,65535]
+	Max block dimension: [1024,1024,64]
+
+	Total global memory: 11177 MB
+	Shared memory per SM: 96 KB
+	32-bit registers per SM: 65536
+	Shared mem per block: 48 KB
+	Registers per block: 65536
+	Total const mem: 64 KB
+	L2 cache size: 2816 KB
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+{\bf \emph{All problems have been executed with this GPU}}
+
+
+\newpage
+
+%1
+\section{\Huge Problem 1}
+\vspace{0.5cm}
+\subsection{Compilation and execution instruction }
+\vspace{0.3cm}
+\hrule
+\begin{lstlisting}
+export PATH=/usr/local/cuda-10.0/bin:${PATH}
+nvcc -g -G -arch=sm_61 -std=c++11 assignment5-p1.cu -o assignment5-p1
+./assignment5-p1
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+\subsection{Performance Report and Explanation}
+{\bf \emph{Exact time details and different codes tried have been commented in code for all the below speedups}}\\
+\newline
+{\bf kernel1} (Naive Kernel, 8192) gave a speedup of about {\bf 12X} \\
+{\bf kernel2} (Naive Kernel, 8200) without any optimisation gave a speedup similar to kernel1 \\
+{\bf kernel2} (Optimised Kernel, 8200) with below optimisations gave a final speedup of about {\bf 25X} \\
+\newline
+{\bf \large Optimisations}
+\begin{itemize}
+\item {\bf ThreadsPerBlock}: 
+	\begin{itemize}
+	\item In the naive version threadsPerBlock used was {\bf 1024} but after varying the threadsPerBlock for
+	kernel2, Speedup increased from {\bf 12X with 1024} to {\bf 17X with 64} 
+	\item The Increase in speedup can be attributed to more number of warps possible with decrease 
+	blockDims.
+	\item Also, the speedup actually worsened for threadsPerBlock = 32 ({\bf 15.7X}), reason can be attributed to 
+	the threaddivergence that will happen due to N not being a power of 2. We know thread divergence effect is 
+	high with lower dims.
+	\end{itemize}
+\item {\bf Manual Unrolling and reusing valuess using registers}:
+	\begin{itemize}
+	\item 4-way unrolling with value re-use using local variables (registers) increased the speedup to about 
+	{\bf 25X}. Value re-use helped as register access is much faster than global memory access and is also
+	unaffected with cache conflicts. Unrolling helped due to less number of operations.
+	\item 2-way unrolling gave about {\bf 23X} and value re-use for higher dimension, {16 gave 10X} which was
+	considerably less. Performance lost due to higher number of for-loops (Please see code).
+	\end{itemize}
+\end{itemize}
+
+\newpage
+
+%2
+\section{\Huge Problem 2}
+\vspace{0.5cm}
+\subsection{Compilation and execution instruction }
+\vspace{0.3cm}
+\hrule
+\begin{lstlisting}
+export PATH=/usr/local/cuda-10.0/bin:${PATH}
+nvcc -g -G -arch=sm_61 -std=c++11 assignment5-p2.cu -o assignment5-p2
+./assignment5-p2
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+\subsection{Algorithms tried and their impact}
+{\bf \emph{Exact time details and different codes tried have been commented in code for all the below speedups}}\\
+\newline
+Final code gave a speed of about {\bf 1.567X on N = (1 $<<$ 24)} \\
+\begin{enumerate}
+\item {\bf Triangular Calculation}:
+	\begin{itemize}
+	\item Launched (NxN) sized grid of threads. And for each i, did an atomicAdd of j-th element's value for all
+	threads such that $i > j (y > x)$.
+	\item Was much slower for given N and smaller Ns as well, because of very large number of 
+	threads launched and the one of the bottleneck being atomicAdd synchronisation.
+	\end{itemize}
+\item {\bf Binary-Tree summation of Chunked Data}
+	\begin{itemize}
+	\item Divide data into chunks of size {\bf EPS\_BLOCK\_SIZE} and for each chunk compute the exclusive
+	sum for its own elements only (Run this kernel once)
+	\item Then sequentially run another kernel {\bf logX times $(X = N / EPS\_BLOCK\_SIZE)$} which takes
+	current consecutive chunks for which individual exclusive prefix sum have been computer and compute
+	the combined exclusive sum of both by summing the last value of chunk 1 to all values of chunk 2.
+	\item Launched N/2 threads for each kernel launch, and each thread added value to one element of chunk.
+	\item For each thread, first stored the value to be summed in {\bf shared memory} and then used it for all
+	threads of the block to add it to the corresponding elements.
+	\item It didn't give much speed up, it gave varying speedup from {\bf 0.9X to 1.1X}
+	\end{itemize}
+\item {\bf Optimised Binary-Tree summation of Chunked Data}
+	\begin{itemize}
+	\item In the above implementation, we can see that for the kernel that do the summation, I launched 1 thread
+	for each element whose value has to be updated. So the work per thread is quite less, to give sufficient work
+	per thread code was updated. Now each thread work on {\bf 8 elements of the array}, i.e. the add the
+	required value sequentially to 8 consecutive elements of array.
+	\item This after fine tuning other variables, gave a speedup of {\bf 1.567X} on {\bf $N = (1 << 24)$} 
+	\item The variables have been fine tuned for giving speedup for above N. For other N the speedups varies
+	and for higher values of N, the variables have to be fine tuned differently for above implementation to give
+	high speedups.
+	\end{itemize}
+\end{enumerate}
+
+
+\newpage
+
+%3
+\section{\Huge Problem 3}
+\vspace{0.5cm}
+\subsection{Compilation and execution instruction }
+\vspace{0.3cm}
+\hrule
+\begin{lstlisting}
+export PATH=/usr/local/cuda-10.0/bin:${PATH}
+nvcc -g -G -arch=sm_61 -std=c++11 assignment5-p3.cu -o assignment5-p3
+./assignment5-p3
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+\subsection{Performance Report and Explanation}
+{\bf \emph{Exact time details and different codes tried have been commented in code for all the below speedups}}\\
+\newline
+{\bf Best kernel} gave a speedup of about {\bf 74X} with {\bf Matrix Size = 4096} \\
+{\bf Best kernel} gave a speedup of about {\bf 80X} with {\bf Matrix Size = 2048} \\
+\newline
+{\bf \large Optimisations} [Below speedups are given for Matrix Size = 2048]
+\begin{itemize}
+\item {\bf Register Optimisation}
+	\begin{itemize}
+	\item In the naive kernel, instead of adding multiplied values directly to the result matrix, first create a local 
+	variable (register) and then update it, and then store it at loop end to result matrix. This increased speedup
+	by {\bf 10 (43X to 53X)}. Reason - registers are much faster, also help fixing a register for each thread to be
+	used specifically for this purpose.
+	\end{itemize}
+\item {\bf Unrolling in the above implementation}
+	\begin{itemize}
+	\item 8-way unrolling in the above implementation increased speedup from {\bf 53X to 55X}. Reason - less
+	number of loop-comparison/update operations
+	\end{itemize}
+\item {\bf Tiling + Unrolling + Register Optimisation}
+	\begin{itemize}
+	\item Used Tiling to help exploit spacial locality helped increase the speedup further from {\bf 55X to 80X}
+	\item Also above optimisations of 8-way unrolling and register used. 4-way unrolling gave a bit less speed-up
+	for 4096 but better speedup for 2048.
+	\end{itemize}	
+\end{itemize}
+
+
+\newpage
+
+%4
+\section{\Huge Problem 4}
+\vspace{0.5cm}
+\subsection{Compilation and execution instruction }
+\vspace{0.3cm}
+\hrule
+\begin{lstlisting}
+export PATH=/usr/local/cuda-10.0/bin:${PATH}
+nvcc -g -G -arch=sm_61 -std=c++11 assignment5-p4.cu -o assignment5-p4
+./assignment5-p4
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+\subsection{Performance Report and Explanation}
+{\bf \emph{Exact time details and different codes tried have been commented in code for all the below speedups}}\\
+\newline
+{\bf Speedups for Naive version} for various MATRIX\_SIZE
+\begin{itemize}
+\item {\bf MATRIX\_SIZE = 1024} Speedup of about {\bf 17.3X with Naive Kernel}
+\item {\bf MATRIX\_SIZE = 2048} Speedup of about {\bf 25.4X with Naive Kernel}
+\item {\bf MATRIX\_SIZE = 4096} Speedup of about {\bf 6.7X with Naive Kernel}
+\end{itemize}
+{\bf Speedups for optimised version} for various {\bf BLOCK\_SIZE, MATRIX\_SIZE and UNROLLING}
+\begin{itemize}
+\item {\bf BLOCK\_SIZE = 8}
+	\begin{itemize}
+	\item {\bf MATRIX\_SIZE = 1024} Speedup of about {\bf 55.3X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 2048} Speedup of about {\bf 181X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 4096} Speedup of about {\bf 172X with Optimised Kernel}
+	\end{itemize}
+\item {\bf BLOCK\_SIZE = 16}
+	\begin{itemize}
+	\item {\bf MATRIX\_SIZE = 1024} Speedup of about {\bf 56.7X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 2048} Speedup of about  {\bf 214X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 4096} Speedup of about {\bf 218.5X with Optimised Kernel}
+	\end{itemize}
+\item {\bf BLOCK\_SIZE = 32}
+	\begin{itemize}
+	\item {\bf MATRIX\_SIZE = 1024} Speedup of about {\bf 61X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 2048} Speedup of about  {\bf 231X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 4096} Speedup of about {\bf 238.7X with Optimised Kernel}
+	\end{itemize}
+\item {\bf BLOCK\_SIZE = 32 with 8-way UNROLLING}
+	\begin{itemize}
+	\item {\bf MATRIX\_SIZE = 1024} Speedup of about {\bf 66.3X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 2048} Speedup of about  {\bf 259X with Optimised Kernel}
+	\item {\bf MATRIX\_SIZE = 4096} Speedup of about {\bf 272X with Optimised Kernel}
+	\end{itemize}
+\end{itemize}
+
+\newpage
+
+%5
+\section{\Huge Problem 5}
+\vspace{0.5cm}
+\subsection{Compilation and execution instruction }
+\vspace{0.3cm}
+\hrule
+\begin{lstlisting}
+export PATH=/usr/local/cuda-10.0/bin:${PATH}
+nvcc -g -G -arch=sm_61 -std=c++11 assignment5-p5.cu -o assignment5-p5
+./assignment5-p5
+\end{lstlisting}
+\hrule 
+\vspace{0.5cm}
+
+\subsection{Performance Report and Explanation}
+{\bf \emph{Exact time details and different codes tried have been commented in code for all the below speedups}}\\
+\newline
+{\bf Best kernel} gave a speedup of about {\bf 1.7X} with {\bf N = 512} \\
+{\bf Best kernel} gave a speedup of about {\bf 1.5X} with {\bf N = 64} \\
+\newline
+{\bf \large Optimisations}
+\begin{itemize}
+\item Naive Version on (N = 64) gave varying performance from {\bf 1.6ms to 3.4ms}, serial took 2.5ms on average.
+\item The Optimised version exploits spacial locality by tiling and it gives improved and consistent performance for (N = 64) {\bf 1.5ms to 1.7ms}
+\item The optimised version exploits spacial locality but for boundary points, it go for the global memory and this is one of the possible bottleneck because of which we didn't get much improvement in this scenario.
+\end{itemize}
+
+\end{document}
